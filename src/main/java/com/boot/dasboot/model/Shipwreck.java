@@ -1,14 +1,23 @@
 package com.boot.dasboot.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Shipwreck {
-	Long id;
-	String name;
-	String description;
-	String condition;
-	Integer depth;
-	Double latitude;
-	Double longitude;
-	Integer yearDiscovered;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	private String name;
+	private String description;
+	private String condition;
+	private Integer depth;
+	private Double latitude;
+	private Double longitude;
+	private Integer yearDiscovered;
 
 	public Shipwreck() { }
 
