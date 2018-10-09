@@ -12,8 +12,9 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class ShipwreckControllerTest {
     @InjectMocks
@@ -39,7 +40,7 @@ public class ShipwreckControllerTest {
         when(shipwreckRepository.findAll()).thenReturn(list);
 
         List<Shipwreck> returnList = controller.list();
-        assertEquals(list, returnList);
+        assertThat(returnList, is(list));
     }
 
     @Test
@@ -48,7 +49,7 @@ public class ShipwreckControllerTest {
         when(shipwreckRepository.saveAndFlush(shipwreck)).thenReturn(shipwreck);
 
         Shipwreck wreck = controller.create(shipwreck);
-        assertEquals(shipwreck, wreck);
+        assertThat(wreck, is(shipwreck));
     }
 
     @Test
@@ -58,7 +59,7 @@ public class ShipwreckControllerTest {
         when(shipwreckRepository.getOne(ID)).thenReturn(shipwreck);
 
         Shipwreck wreck = controller.get(ID);
-        assertEquals(ID.longValue(), wreck.getId().longValue());
+        assertThat(wreck.getId().longValue(), is(ID.longValue()));
     }
 
     @Test
@@ -73,7 +74,7 @@ public class ShipwreckControllerTest {
         when(shipwreckRepository.saveAndFlush(existingShipwreck)).thenReturn(existingShipwreck);
 
         Shipwreck wreck = controller.update(ID, shipwreck);
-        assertEquals(shipwreck.getDepth(),wreck.getDepth());
+        assertThat(wreck.getDepth(), is(shipwreck.getDepth()));
     }
 
     @Test
@@ -83,7 +84,7 @@ public class ShipwreckControllerTest {
         when(shipwreckRepository.getOne(ID)).thenReturn(shipwreck);
 
         Shipwreck wreck = controller.delete(ID);
-        assertEquals(shipwreck.getId(), wreck.getId());
+        assertThat(wreck.getId(), is(shipwreck.getId()));
         // I don't think this actually tests that anything is being deleted...
     }
 }
